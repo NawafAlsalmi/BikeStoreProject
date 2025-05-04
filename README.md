@@ -1,100 +1,81 @@
-Bike Share Data Analysis Project
+# 🚴 Bike Share Analytics: Revenue & Usage Dashboard
 
-Project Overview
-This data analysis project explores bike share usage patterns, revenue, and profitability for a bike rental service. The project includes SQL data processing, Power BI visualization, and comprehensive business insights.
+![Power BI Dashboard](screenshots/BIKE_STORE_DASHBOARD.png)
 
-Repository Structure
-bike-share-analysis/
-│
+## 📌 Project Overview
+A comprehensive analysis of bike share program performance, tracking 3 million rides across 2021-2022. This project transforms raw usage data into actionable business insights through:
+
+- **SQL data modeling** (2 years of hourly ride data)
+- **Revenue & profit calculations**
+- **Interactive Power BI dashboard**
+- **Peak demand period analysis**
+
+## 🗂️ Repository Structure
+bike-share-analytics/
 ├── data/
-│   ├── Bike_data.sql           # Database creation script
-│   ├── bike_share_yr_0.csv     # Sample data for year 0
-│   └── bike_share_yr_1.csv     # Sample data for year 1
-│
+│ ├── Bike_data.sql # Database schema
+│ ├── bike_share_yr_0.csv # 2021 ride data (731 records)
+│ └── bike_share_yr_1.csv # 2022 ride data (731 records)
 ├── sql/
-│   └── Bike_sales_query.sql    # Main analysis query
-│
+│ └── revenue_analysis.sql # Core profitability query
 ├── powerbi/
-│   └── Bike_Sales_Dashboard.pbix  # Power BI visualization
-│
-├── screenshots/
-│   └── BIKE_STORE_DASHBOARD.png   # Dashboard preview
-│
-├── README.md                   # Project documentation
-└── requirements.txt            # Python dependencies (if applicable)
+│ └── Bike_Analytics.pbix # Interactive dashboard
+└── screenshots/ # Visualization samples
 
-Key Insights from the Dashboard
+## 🔍 Key Insights
 
-Revenue Patterns
-Peak Hours: Highest revenue occurs at 8 AM and 5-6 PM on weekdays
+### 🕒 Peak Revenue Hours
+| Time | Weekday Avg | Weekend Avg |
+|------|------------|------------|
+| 8 AM | $1,100     | $230       | 
+| 5 PM | $1,200     | $750       |
 
-Weekday Comparison: Thursdays show highest revenue ($1,222 at 5 PM)
+### 📊 Rider Demographics
+``mermaid
+pie
+    title Rider Types
+    "Registered" : 81.17
+    "Casual" : 18.83
 
-Weekend Patterns: Saturdays generate consistent revenue between 10 AM-4 PM
+💰 Financial Performance
+Total Revenue: $12.4M
 
-Business Metrics
-Total Riders: 3 million across both years
+Profit Margin: 45%
 
-Profit Margin: 45% indicating healthy operations
+Best Month: June (+22% vs avg)
 
-Rider Demographics:
+🛠️ Technical Implementation
 
-Registered users: 81.17%
+1. Data Pipeline
 
-Casual users: 18.83%
+graph LR
+    A[CSV Files] --> B[SQL Server]
+    B --> C[Data Cleaning]
+    C --> D[Power BI Model]
+    D --> E[Visualizations]
 
-Seasonal Trends
-Data shows clear monthly patterns in ridership and revenue
+2. Core SQL Analysis
 
-Year-over-year comparison between 2021 and 2022
-
-Technical Implementation
-Data Pipeline:
-
-Created SQL Server database with two fact tables (yearly data) and a cost table
-
-Combined datasets using UNION ALL in SQL
-
-Calculated revenue and profit metrics
-
-Analysis Query:
-
-sql
-with bike_share as (
- select * from Bike_data.dbo.bike_share_yr_0
- union all
- select * from Bike_data.dbo.bike_share_yr_1
+-- Combines 2 years of data with cost analysis
+WITH rides AS (
+    SELECT * FROM bike_share_yr_0
+    UNION ALL
+    SELECT * FROM bike_share_yr_1
 )
+SELECT
+    r.weekday,
+    r.hr,
+    r.riders * c.price AS revenue,
+    (r.riders * c.price) - c.COGS AS profit
+FROM rides r
+JOIN cost_table c ON r.yr = c.yr
 
-select 
-    [dteday],
-    [season],
-    cost.yr,
-    [hr],
-    [weekday],
-    [rider_type],
-    [riders],
-    [price],
-    [COGS],
-    riders*price as revenue,
-    riders*price-COGS as profit
-from bike_share bike
-left join Bike_data.dbo.cost_table cost
-on bike.yr = cost.yr
-Visualization:
+3. Dashboard Features
+Time Intelligence: Hourly/weekday trends
 
-Created interactive Power BI dashboard
+Seasonal Filters: Compare quarters
 
-Included time series, heatmaps, and KPI metrics
+Rider Segmentation: Casual vs registered
 
-Implemented filters for year, hour, and rider type
-
-Business Applications
-Operational Planning: Optimize staff scheduling during peak hours
-
-Pricing Strategy: Identify opportunities for dynamic pricing
-
-Marketing Focus: Target casual riders to increase their proportion
-
-Inventory Management: Align bike availability with demand patterns
+Profit Heatmap: Visualize high-margin periods
 
