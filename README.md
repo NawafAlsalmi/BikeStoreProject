@@ -1,6 +1,5 @@
 # 🚴 Bike Share Analytics: Revenue & Usage Dashboard
 
-![Power BI Dashboard](screenshots/BIKE_STORE_DASHBOARD.png)
 
 ## 📌 Project Overview
 A comprehensive analysis of bike share program performance, tracking 3 million rides across 2021-2022. This project transforms raw usage data into actionable business insights through:
