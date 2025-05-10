@@ -9,17 +9,9 @@ A comprehensive analysis of bike share program performance, tracking 3 million r
 - **Interactive Power BI dashboard**
 - **Peak demand period analysis**
 
-## 🗂️ Repository Structure
-bike-share-analytics/
-├── data/
-│ ├── Bike_data.sql # Database schema
-│ ├── bike_share_yr_0.csv # 2021 ride data (731 records)
-│ └── bike_share_yr_1.csv # 2022 ride data (731 records)
-├── sql/
-│ └── revenue_analysis.sql # Core profitability query
-├── powerbi/
-│ └── Bike_Analytics.pbix # Interactive dashboard
-└── screenshots/ # Visualization samples
+## 📊 Dashboard Preview
+
+![BikeStore Dashboard](BikeStore_Dashboard.png)
 
 ## 🔍 Key Insights
 
