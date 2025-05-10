@@ -11,7 +11,7 @@ A comprehensive analysis of bike share program performance, tracking 3 million r
 
 ## 📊 Dashboard Preview
 
-![BikeStore Dashboard](BikeStore_Dashboard.png)
+![BikeStore Dashboard](BIKE&STORE&DASHBORAD.png)
 
 ## 🔍 Key Insights
 
